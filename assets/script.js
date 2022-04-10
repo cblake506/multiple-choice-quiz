@@ -7,6 +7,7 @@ var attemptNumber = 0;
 
 
 
+
 var quizFields = [
     {
         question:"What does HTML stand for?",
@@ -61,10 +62,18 @@ function shuffle(arr) {
     return arr;
 }
 
-function startQuiz(){
-    //remove start button
+function emptyButtons(){
+    questionEl.contents().remove();
     answerButton1.contents().remove();
-    
+    answerButton2.contents().remove();
+    answerButton3.contents().remove();
+    answerButton4.contents().remove();
+}
+
+function startQuiz(){
+    //clear out answer buttons
+    emptyButtons();
+
     let questionNum = [];
     //build an array of sequential indicies
     for(let i = 0; i < quizFields.length; i++){
@@ -76,9 +85,19 @@ function startQuiz(){
 
     
     printQAndA(questionNum[attemptNumber]);
-    
+
+    var correctEl = $("#correct");
+    var incorrectEl = $("#wrong");
+    if(attemptNumber < quizFields.length){
+        correctEl.on('click', startQuiz);
+        incorrectEl.on('click', startQuiz);
+    } else{
+        return;
+    }
 }
 
 answerButton1.append("<button>Start</button>");
-answerButton1.on('click', startQuiz)
-//startQuiz();
+
+answerButton1.contents().on('click', startQuiz);
+
+
