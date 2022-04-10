@@ -10,21 +10,38 @@ var attemptNumber = 0;
 
 var quizFields = [
     {
-        question:"What does HTML stand for?",
+        question:"Commonly used datatypes do NOT include:",
         answer:[
-            "<button id=\"correct\">correct</button>", 
-            "<button id=\"wrong\">incorrect1</button>", 
-            "<button id=\"wrong\">incorrect2</button>", 
-            "<button id=\"wrong\">incorrect3</button>"]
+            "<button class=\"correct\">alerts</button>", 
+            "<button class=\"wrong\">booleans</button>", 
+            "<button class=\"wrong\">strings</button>", 
+            "<button class=\"wrong\">numbers</button>"]
     },
     {
-        question:"Question2",
+        question:"The condition in an if/else statement is enclosed within:",
         answer:[
-            "<button id=\"correct\">correct</button>", 
-            "<button id=\"wrong\">incorrect1</button>", 
-            "<button id=\"wrong\">incorrect2</button>", 
-            "<button id=\"wrong\">incorrect3</button>"]
-    }];
+            "<button class=\"correct\">()</button>", 
+            "<button class=\"wrong\">\"\"</button>", 
+            "<button class=\"wrong\">{}</button>", 
+            "<button class=\"wrong\">[]</button>"]
+    },
+    {
+        question:"Arrays within javascript can be used to store:",
+        answer:[
+            "<button class=\"correct\">all of the above</button>", 
+            "<button class=\"wrong\">other arrays</button>", 
+            "<button class=\"wrong\">strings</button>", 
+            "<button class=\"wrong\">numbers</button>"]
+    },
+    {
+        question:"Strings in javascript must be enclosed inside ____:",
+        answer:[
+            "<button class=\"correct\">\"\"</button>", 
+            "<button class=\"wrong\">()</button>", 
+            "<button class=\"wrong\">{}</button>", 
+            "<button class=\"wrong\">[]</button>"]
+    }
+];
 
 
 
@@ -74,20 +91,14 @@ function startQuiz(){
     //clear out answer buttons
     emptyButtons();
 
-    let questionNum = [];
-    //build an array of sequential indicies
-    for(let i = 0; i < quizFields.length; i++){
-        questionNum.push(i);
-    }
-
-    //shuffle the order of the questions
-    questionNum = shuffle(questionNum);
+    
+    console.log(questionNum);
 
     
     printQAndA(questionNum[attemptNumber]);
 
-    var correctEl = $("#correct");
-    var incorrectEl = $("#wrong");
+    var correctEl = $(".correct");
+    var incorrectEl = $(".wrong");
     if(attemptNumber < quizFields.length){
         correctEl.on('click', startQuiz);
         incorrectEl.on('click', startQuiz);
@@ -97,6 +108,15 @@ function startQuiz(){
 }
 
 answerButton1.append("<button>Start</button>");
+
+var questionNum = [];
+// build an array of sequential indicies
+for(let i = 0; i < quizFields.length; i++){
+    questionNum.push(i);
+}
+
+// shuffle the order of the questions
+questionNum = shuffle(questionNum);
 
 answerButton1.contents().on('click', startQuiz);
 
