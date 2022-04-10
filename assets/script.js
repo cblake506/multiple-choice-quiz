@@ -4,6 +4,8 @@ var answerButton2 = $("#answer-2");
 var answerButton3 = $("#answer-3");
 var answerButton4 = $("#answer-4");
 var attemptNumber = 0;
+var correctNum = 0;
+var incorrectNum = 0;
 
 
 
@@ -91,18 +93,56 @@ function startQuiz(){
     //clear out answer buttons
     emptyButtons();
 
-    
-    console.log(questionNum);
-
-    
-    printQAndA(questionNum[attemptNumber]);
-
     var correctEl = $(".correct");
     var incorrectEl = $(".wrong");
     if(attemptNumber < quizFields.length){
-        correctEl.on('click', startQuiz);
-        incorrectEl.on('click', startQuiz);
+        printQAndA(questionNum[attemptNumber]);
+        var correctEl = $(".correct");
+        var incorrectEl = $(".wrong");
+
+        correctEl.on('click', startQuizCorrect);
+        incorrectEl.on('click', startQuizIncorrect);
     } else{
+        emptyButtons();
+        answerButton1.append("<div> Correct: " + correctNum + " Incorrect: " + incorrectNum + "</div>")
+        return;
+    }
+}
+
+function startQuizCorrect(){
+    //clear out answer buttons
+    emptyButtons();
+    correctNum++;
+
+    if(attemptNumber < quizFields.length){
+        printQAndA(questionNum[attemptNumber]);
+        var correctEl = $(".correct");
+        var incorrectEl = $(".wrong");
+
+        correctEl.on('click', startQuizCorrect);
+        incorrectEl.on('click', startQuizIncorrect);
+    } else{
+        emptyButtons();
+        answerButton1.append("<div> Correct: " + correctNum + " Incorrect: " + incorrectNum + "</div>")
+        return;
+    }
+}
+
+function startQuizIncorrect(){
+    //clear out answer buttons
+    emptyButtons();
+    incorrectNum++;
+
+    if(attemptNumber < quizFields.length){
+        printQAndA(questionNum[attemptNumber]);
+        var correctEl = $(".correct");
+        var incorrectEl = $(".wrong");
+
+        correctEl.on('click', startQuizCorrect);
+        incorrectEl.on('click', startQuizIncorrect);
+    } else{
+        emptyButtons();
+        answerButton1.append("<div> Correct: " + correctNum + " Incorrect: " + incorrectNum + "</div>")
         return;
     }
 }
