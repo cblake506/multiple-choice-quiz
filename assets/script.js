@@ -36,7 +36,7 @@ var quizFields = [
             "<button class=\"wrong\">numbers</button>"]
     },
     {
-        question:"Strings in javascript must be enclosed inside ____:",
+        question:"Strings in javascript can be enclosed inside ____:",
         answer:[
             "<button class=\"correct\">\"\"</button>", 
             "<button class=\"wrong\">()</button>", 
@@ -110,41 +110,13 @@ function startQuiz(){
 }
 
 function startQuizCorrect(){
-    //clear out answer buttons
-    emptyButtons();
     correctNum++;
-
-    if(attemptNumber < quizFields.length){
-        printQAndA(questionNum[attemptNumber]);
-        var correctEl = $(".correct");
-        var incorrectEl = $(".wrong");
-
-        correctEl.on('click', startQuizCorrect);
-        incorrectEl.on('click', startQuizIncorrect);
-    } else{
-        emptyButtons();
-        answerButton1.append("<div> Correct: " + correctNum + " Incorrect: " + incorrectNum + "</div>")
-        return;
-    }
+    startQuiz();
 }
 
 function startQuizIncorrect(){
-    //clear out answer buttons
-    emptyButtons();
     incorrectNum++;
-
-    if(attemptNumber < quizFields.length){
-        printQAndA(questionNum[attemptNumber]);
-        var correctEl = $(".correct");
-        var incorrectEl = $(".wrong");
-
-        correctEl.on('click', startQuizCorrect);
-        incorrectEl.on('click', startQuizIncorrect);
-    } else{
-        emptyButtons();
-        answerButton1.append("<div> Correct: " + correctNum + " Incorrect: " + incorrectNum + "</div>")
-        return;
-    }
+    startQuiz();
 }
 
 answerButton1.append("<button>Start</button>");
